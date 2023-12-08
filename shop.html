@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KFC PEOPLE SHOP</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">fhome
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap"
+    rel="stylesheet">
+
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <link rel="stylesheet" href="shopcss.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="ProductController">
+
+
+  <nav class="navbar">
+    <a href="#" class="navbar-logo">KFC<span>people</span>.</a>
+
+    <div class="navbar-nav">
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#menu">Best Seller</a>
+      <a href="#products">Product</a>
+      <a href="#contact">Membership</a>
+    </div>
+
+    <div class="navbar-extra">
+      <a href="#" id="search-button"><i data-feather="search"></i></a>
+      <a href="#" id="shopping-cart-button"><i data-feather="shopping-cart"></i></a>
+
+      <div class="dropdown-container" ng-mouseenter="showDropdown = true" ng-mouseleave="showDropdown = false">
+        <a href="#" id="user-button">
+          <i data-feather="user"></i>
+        </a>
+        <div class="dropdown" ng-show="showDropdown">
+          <a href="login.html">Log In</a>
+          <a href="register.html">Sign Up</a>
+        </div>
+      </div>
+
+      <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+    </div>
+
+
+    <div class="search-form">
+      <input type="search" id="search-box" placeholder="search here..." ng-model="searchTerm">
+      <label for="search-box" ng-click="searchProduct()"> 
+        <i data-feather="search"></i>
+      </label>
+    </div>
+
+
+    <div class="shopping-cart" ng-class="{ 'active': showShoppingCart }">
+      <div class="cart-item" ng-repeat="item in cartItems">
+          <img ng-src="{{ item.image }}" alt="{{ item.name }}">
+          <div class="item-detail">
+              <h3>{{ item.name }}</h3>
+              <div class="item-price">IDR {{ item.price }}</div>
+              <div class="quantity-controls">
+                  <button ng-click="decrementQuantity(item)" class="quantity-btn larger">-</button>
+                  <span class="quantity">{{ item.quantity }}</span>
+                  <button ng-click="incrementQuantity(item)" class="quantity-btn larger">+</button>
+              </div>
+          </div>
+      </div>
+  
+
+      <div class="cart-total">
+          <h4>Total:</h4>
+          <div class="total-price">IDR {{ totalPrice }}</div>
+          <button class="checkout-btn" ng-click="showAlert()">Checkout</button>
+        </div>
+      </div>
+  </div>
+
+
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="mask-container">
+      <main class="content">
+        <h1>Enjoy Some <span>Tunes</span></h1>
+        <p>Unearth the melodies, relive the classics, and let the vinyl journey begin!</p>
+      </main>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2><span>About</span> Us</h2>
+
+    <div class="row">
+      <div class="about-img">
+        <img src="asset-image/foto.jpg" alt="Tentang Kami">
+      </div>
+      <div class="content">
+        <h3>Why Choose Us?</h3>
+        <p>Why choose KFCPeople? Firstly, we offer a wide and high-quality selection of vinyl, embracing various music genres to cater to your unique taste. The quality of our products is guaranteed, with each vinyl undergoing stringent checks to ensure authenticity and audio excellence. Moreover, our customer service team is always ready to assist you at every step of your musical journey, providing expert advice and answering your questions. </p>
+        <p>We are committed to delivering a safe, convenient, and satisfying online shopping experience, with timely delivery and friendly customer service. Uncover the beauty of analog music at KFCPeople - because every needle drop on vinyl tells an unforgettable story.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="menu" class="menu">
+    <h2><span>Our Best</span> Seller</h2>
+    <p>Explore our Best Sellers collection and discover the most coveted vinyl records, curated to perfection and resonating with the timeless beats that have captured the hearts of music enthusiasts worldwide
+    </p>
+
+    <div class="row">
+      <div class="menu-card">
+        <img src="album/Lilac .jpg" alt="Lilac" class="menu-card-img">
+        <h3 class="menu-card-title">- Lilac -</h3>
+        <p class="menu-card-price">IDR 450K</p>
+      </div>
+      <div class="menu-card">
+        <img src="album/5 star.jpg" alt="5 star" class="menu-card-img">
+        <h3 class="menu-card-title">- 5-Star -</h3>
+        <p class="menu-card-price">IDR 550K</p>
+      </div>
+      <div class="menu-card">
+        <img src="album/Mars.jpg" alt="Mars" class="menu-card-img">
+        <h3 class="menu-card-title">- Unorthofox Jukebox -</h3>
+        <p class="menu-card-price">IDR 750K</p>
+      </div>
+      <div class="menu-card">
+        <img src="album/Fancy .jpg" alt="Fancy " class="menu-card-img">
+        <h3 class="menu-card-title">- Fancy -</h3>
+        <p class="menu-card-price">IDR 550K</p>
+      </div>
+      <div class="menu-card">
+        <img src="album/Monokrom.jpg" alt="Monokrom" class="menu-card-img">
+        <h3 class="menu-card-title">- Monokrom -</h3>
+        <p class="menu-card-price">IDR 770K</p>
+      </div>
+  </section>
+
+
+  <section class="products" id="products">
+    <h2><span>Product</span> List</h2>
+    <p>Browse our extensive selection of premium vinyl here.</p>
+
+    <div class="row">
+      <div class="product-card" ng-repeat="(index, product) in products" id="product-{{index}}">
+            <div class="product-icons">
+                <a ng-click="addToCart(product)"><i data-feather="shopping-cart"></i></a>
+                <a ng-click="showItemDetail(product)" class="item-detail-button"><i data-feather="eye"></i></a>
+            </div>
+            <div class="product-image">
+                <img src="{{ product.image }}" alt="{{ product.name }}">
+            </div>
+            <div class="product-content">
+                <h3>{{ product.name }}</h3>
+                <div class="product-stars">
+                  <span ng-repeat="star in getStars(product.rating)" class="star" ng-class="{ 'star-full': star }">&#9733;</span>
+              </div>
+                <div class="product-price">IDR {{ product.price }} <span>IDR {{ product.discountedPrice }}</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <section id="contact" class="contact">
+    <h2><span>Join</span> Us</h2>
+    <p>Join our exclusive community at KFCPeople and unlock a world of musical delights – become a member today to enjoy special discounts, early access to new releases, and personalized recommendations tailored just for you.
+    </p>
+
+    <div class="row">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.711682907973!2d106.78640650957286!3d-6.169347960430564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f65c9acbaccb%3A0xa5418424ff16c58a!2sUniversitas%20Tarumanagara%2C%20Jl.%20Letjen%20S.%20Parman%2C%20RT.6%2FRW.16%2C%20Tomang%2C%20Kec.%20Grogol%20petamburan%2C%20Kota%20Jakarta%20Barat%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2011440!5e0!3m2!1sid!2sid!4v1701934697190!5m2!1sid!2sid" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
+
+      <form action="">
+        <div class="input-group">
+          <i data-feather="user"></i>
+          <input type="text" placeholder="Name">
+        </div>
+        <div class="input-group">
+          <i data-feather="mail"></i>
+          <input type="text" placeholder="Email">
+        </div>
+        <div class="input-group">
+          <i data-feather="phone"></i>
+          <input type="text" placeholder="Phone Number">
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="socials">
+      <a href="#"><i data-feather="instagram"></i></a>
+      <a href="#"><i data-feather="twitter"></i></a>
+      <a href="#"><i data-feather="facebook"></i></a>
+    </div>
+
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#menu">Top</a>
+      <a href="#contact">Member</a>
+    </div>
+
+    <div class="credit">
+      <p>Created by <a href="">ng.KFC</a>. | &copy; 2023.</p>
+    </div>
+  </footer>
+
+
+  <div class="modal" id="item-detail-modal">
+    <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+            <div class="product-content">
+                <h3>{{ selectedItem.name }}</h3>
+                <p>{{ selectedItem.description }}</p>
+                <div class="product-price">IDR {{ selectedItem.price }} <span>IDR {{ selectedItem.discountedPrice }}</span></div>
+                <a ng-click="addToCart(selectedItem)" ng-class="{ 'hover-effect': isHovered, 'active-effect': isClicked }"
+                ng-mouseenter="isHovered = true" ng-mouseleave="isHovered = false" ng-mousedown="isClicked = true" ng-mouseup="isClicked = false"> 
+                <i data-feather="shopping-cart"></i> <span>add to cart</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <script>
+    feather.replace()
+  </script>
+
+
+  <script>
+    const itemDetailModal = document.querySelector('#item-detail-modal');
+
+    function addToCart(product) {
+      alert(product.name + ' successfully added to your cart');
+    }
+
+    const navbarNav = document.querySelector('.navbar-nav');
+
+    document.querySelector('#hamburger-menu').onclick = () => {
+      navbarNav.classList.toggle('active');
+    };
+
+
+    const searchForm = document.querySelector('.search-form');
+    const searchBox = document.querySelector('#search-box');
+
+    document.querySelector('#search-button').onclick = (e) => {
+      searchForm.classList.toggle('active');
+      searchBox.focus();
+      e.preventDefault();
+    };
+
+
+    const shoppingCart = document.querySelector('.shopping-cart');
+    document.querySelector('#shopping-cart-button').onclick = (e) => {
+      shoppingCart.classList.toggle('active');
+      e.preventDefault();
+    };
+
+
+    const hm = document.querySelector('#hamburger-menu');
+    const sb = document.querySelector('#search-button');
+    const sc = document.querySelector('#shopping-cart-button');
+
+    document.addEventListener('click', function (e) {
+    if (!hm.contains(e.target) && !navbarNav.contains(e.target)) {
+        navbarNav.classList.remove('active');
+    }
+
+    if (!sb.contains(e.target) && !searchForm.contains(e.target)) {
+        searchForm.classList.remove('active');
+    }
+
+    if (!sc.contains(e.target) && !shoppingCart.contains(e.target)) {
+        shoppingCart.classList.remove('active');
+    }
+});
+
+
+    const itemDetailButtons = document.querySelectorAll('.item-detail-button');
+
+    document.querySelector('.modal .close-icon').onclick = (e) => {
+      itemDetailModal.style.display = 'none';
+      e.preventDefault();
+    };
+
+
+    window.onclick = (e) => {
+      if (e.target === itemDetailModal) {
+        itemDetailModal.style.display = 'none';
+      }
+    };
+
+    var app = angular.module('myApp', []);
+
+    app.controller('ProductController', function ($scope,$location, $anchorScroll) {
+
+      $scope.searchProduct = function () {
+        var searchTerm = $scope.searchTerm.toLowerCase();
+        var productIndex = $scope.products.findIndex(function (product) {
+          return product.name.toLowerCase().includes(searchTerm);
+        });
+
+        if (productIndex !== -1) {
+          $location.hash('product-' + productIndex);
+          $anchorScroll();
+        } else {
+          console.log('Product not found:', searchTerm);
+        }
+      };
+
+      $scope.products = [
+        {
+        name: '5-Star',
+        description: '5-Star is the third Korean-language studio album by South Korean boy band Stray Kids. It was released on June 2, 2023, by JYP Entertainment and Republic Records, following their seventh EP Maxident.',
+        image: 'album/5 star.jpg',
+        rating: 4,
+        price: 550000,
+        discountedPrice: 700000
+      },
+      {
+        name: 'Oddinary',
+        description: "Oddinary is the sixth extended play and ninth overall recorded by South Korean boy band Stray Kids. It was released on March 18, 2022, through JYP Entertainment and Republic Records, seven months after the band's second studio album Noeasy.",
+        image: 'album/Oddinary.png',
+        rating: 3,
+        price: 500000,
+        discountedPrice: 670000
+      },
+      {
+        name: 'Cigarettes After Sex',
+        description: 'Cigarettes After Sex is the debut studio album by American ambient pop band Cigarettes After Sex. It was released on June 9, 2017, by Partisan Records and received positive reviews from critics. As of May 2018, it had sold over 20,000 copies in United Kingdom.',
+        image: 'album/CAS.jpg',
+        rating: 2,
+        price: 450000,
+        discountedPrice: 500000
+      },
+      {
+        name: 'Car Crash',
+        description: ' “Car Crash” is a pop-rock track self-written by eaJ and describes the nostalgia and bumps of a relationship. The song was teased via a live performance during Head In The Clouds festival in 2021. The music video was produced by 100 Thieves and features an ensemble cast who present the story of the song.',
+        image: 'album/Car Crash.png',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 850000
+      },
+      {
+        name: 'Lilac',
+        description: 'Lilac is the fifth studio album by South Korean singer-songwriter IU. It was released on March 25, 2021, through Edam Entertainment. The album was certified platinum by the Korean Music Content Association.',
+        image: 'album/Lilac .jpg',
+        rating: 5,
+        price: 450000,
+        discountedPrice: 500000
+      },
+      {
+        name: 'Sensation',
+        description: 'Sensation, an album by Anúna, was released in 2006 on the Danú label. All music featured on the disc is original, written by the Irish composer Michael McGlynn.',
+        image: 'album/Sensation.jpg',
+        rating: 5,
+        price: 850000,
+        discountedPrice: 1000000
+      },
+      {
+        name: 'Evaluasi',
+        description: "Evaluasi is a song performed by Indonesian singer-songwriter, Hindia. This song is the main single Hindia's solo debut album, Dancing with Shadows, as well as his first free release.",
+        image: 'album/Evaluasi.jpg',
+        rating: 5,
+        price: 450000,
+        discountedPrice: 500000
+      },
+      {
+        name: 'How You Like That',
+        description: "The Album is the debut studio album by South Korean girl group Blackpink, released on October 2, 2020 by YG Entertainment and Interscope Records. It is the group's first full-length work since their debut in 2016.",
+        image: 'album/HYLT.jpg',
+        rating: 5,
+        price: 550000,
+        discountedPrice: 750000
+      },
+      {
+        name: 'Sayonara Crawl',
+        description: 'Sayonara Crawl is the 24th single from the Indonesian idol group JKT48. This single was released on YouTube in the form of a music video on October 11, 2023 at 20:00 WIB. This single was also released digitally on that date by Indonesia Musik Nusantara (or JKT48 management).',
+        image: 'album/SC.jpg',
+        rating: 5,
+        price: 250000,
+        discountedPrice: 350000
+      },
+      {
+        name: 'Format Masa Depan',
+        description: "Format Masa Depan is the second album by the band Dewa which was released in 1994. This album is Dewa's first album released under the record company HJ Productions and distributed by Aquarius Musikindo.",
+        image: 'album/FMD.jpg',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 850000
+      },
+      {
+        name: 'Puspa',
+        description: 'P.U.S.P.A or Putuskan Saja Pacarmu is a song by the band ST 12 which was used as the first single from the album P.U.S.P.A. This song was also used for the soap opera Melati for Marvel',
+        image: 'album/Puspa.jpg',
+        rating: 5,
+        price: 450000,
+        discountedPrice: 500000
+      },
+      {
+        name: 'Fancy',
+        description: 'Fancy You is the seventh extended play by the South Korean girl group Twice. It was released by JYP Entertainment on April 22, 2019, and features the lead single "Fancy". The group embarked on a world tour in support of the EP.',
+        image: 'album/Fancy .jpg',
+        rating: 5,
+        price: 550000,
+        discountedPrice: 650000
+      },
+      {
+        name: 'NewJeans',
+        description: 'New Jeans is the self titled debut extended play (EP) by South Korean girl group NewJeans. It was released digitally on August 1, 2022 and physically on August 8, 2022 by ADOR, a subsidiary of Hybe Corporation. The EP contains four tracks, including the three singles "Attention", "Hype Boy" and "Cookie". ',
+        image: 'album/NewJeans.jpg',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 850000
+      },
+      {
+        name: 'Dummy Boy',
+        description: 'Dummy Boy is the debut studio album by American rapper 6ix9ine. It was released on November 27, 2018, but was originally scheduled to be released four days earlier. It follows his debut mixtape, Day69, released earlier in 2018.',
+        image: 'album/Dummy Boy .jpg',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 850000
+      },
+      {
+        name: 'Chase Altlantic',
+        description: 'CHASE ATLANTIC’s self-titled debut featuring songs from the Part One, Part Two, and Part Three EPs. In early 2017, they signed to Warner Music Group. Afterwards, they released those three EPs to build anticipation for this release.',
+        image: 'album/Chase Atlantic.jpg',
+        rating: 5,
+        price: 650000,
+        discountedPrice: 850000
+      },
+      {
+        name: 'V',
+        description: "V is the fifth studio album by American band Maroon 5. The album was released on August 29, 2014, through 222 and Interscope Records. V was Maroon 5's first album to be released through Interscope after the band's previous label, A&M Octone Records, transferred them along with most of its artists to Interscope",
+        image: 'album/Maps.jpg',
+        rating: 5,
+        price: 350000,
+        discountedPrice: 500000
+      },
+      {
+        name: 'Humble',
+        description: '"Humble" (stylized as "HUMBLE.") is a song by American rapper Kendrick Lamar. It was released on March 30, 2017, along with its music video, by Top Dawg Entertainment, Aftermath Entertainment and Interscope Records. The song was written by Lamar and producers Mike Will Made It and Pluss.',
+        image: 'album/Humble.jpg',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 850000
+      },
+      {
+        name: 'Ballads 1',
+        description: 'Ballads 1 is the debut studio album by Japanese singer-songwriter Joji. It serves as a follow-up to In Tongues EP, his first project as Joji, and Pink Season, his only album released under the now-retired alter-ego Pink Guy. It was released on 26 October 2018 through 88rising and 12Tone Music.',
+        image: 'album/Joji.jpg',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 800000
+      },
+      {
+        name: 'What Is Love',
+        description: 'What Is Love? is the fifth extended play by South Korean girl group Twice. It was released on April 9, 2018, by JYP Entertainment and is distributed by Iriver. It includes the title track of the same name produced by Park Jin-young.',
+        image: 'album/What.jpg',
+        rating: 5,
+        price: 450000,
+        discountedPrice: 500000
+      },
+      {
+        name: 'Unorthodox Jukebox',
+        description: "Unorthodox Jukebox is the second studio album by American singer and songwriter Bruno Mars. It was released on December 7, 2012, by Atlantic Records and was made available to listen to in its entirety for a week before its release. It serves as the follow-up to Mars's debut record Doo-Wops & Hooligans.",
+        image: 'album/Mars.jpg',
+        rating: 5,
+        price: 750000,
+        discountedPrice: 900000
+      },
+      {
+        name: 'Sesuatu di Jogja',
+        description: 'Sesuatu Di Jogja merupakan lagu karya Adhitia Sofyan yang dirilis tahun 2017.',
+        image: 'album/Jogja.jpg',
+        rating: 5,
+        price: 850000,
+        discountedPrice: 750000
+      },
+      {
+        name: 'Monokrom',
+        description: 'Monokrom is the third studio album from Indonesian singer-songwriter, Tulus. This album was released on August 3 2016 through the record company TulusCompany. Tulus calls this album "the sweetest expression of gratitude" to the people who matter in his life and musical career.',
+        image: 'album/Monokrom.jpg',
+        rating: 5,
+        price: 770000,
+        discountedPrice: 900000
+      }
+      ];
+      $scope.cartItems = [];
+      $scope.totalPrice = 0;
+
+
+    $scope.showShoppingCart = false;
+
+   
+    $scope.toggleShoppingCart = function () {
+    $scope.showShoppingCart = !$scope.showShoppingCart;
+    if ($scope.showShoppingCart) {
+            $location.hash('shopping-cart-section');
+            $anchorScroll();
+        }
+    };
+
+    if ($scope.showShoppingCart) {
+            $location.hash('shopping-cart-section');
+            $anchorScroll();
+        }
+
+        $scope.incrementQuantity = function (item) {
+        item.quantity = (item.quantity || 1) + 1;
+        $scope.calculateTotal();
+    };
+
+ 
+    $scope.decrementQuantity = function (item) {
+        if (item.quantity && item.quantity > 1) {
+            item.quantity -= 1;
+        } else {
+        var index = $scope.cartItems.indexOf(item);
+        if (index !== -1) {
+            $scope.cartItems.splice(index, 1);
+        }
+      }
+      $scope.calculateTotal();
+    };
+
+    $scope.showAlert = function () {
+      if ($scope.cartItems.length > 0) {
+            alert('Thanks for your purchase, it will be send shortly'); 
+            $scope.cartItems = []; 
+            $scope.calculateTotal(); 
+        } else {
+            alert("You haven't put anything into your cart yet");
+        }
+    };
+
+      $scope.addToCart = function (product) {
+
+      alert(product.name + ' successfully added to your cart');
+
+      var existingItem = $scope.cartItems.find(item => item.name === product.name);
+
+    if (existingItem) {
+
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+  } else {
+
+    $scope.cartItems.push({
+        name: product.name,
+        image: product.image,
+        price: product.price,
+        quantity: 1
+    });
+}
+
+    $scope.calculateTotal();
+    $scope.toggleShoppingCart(); 
+    };
+
+
+    $scope.toggleShoppingCart = function () {
+        $scope.showShoppingCart = !$scope.showShoppingCart;
+
+        $scope.userClosedCart = false;
+    };
+
+    $scope.closeShoppingCart = function () {
+        $scope.userClosedCart = true;
+    };
+
+
+    $scope.calculateTotal = function () {
+      $scope.totalPrice = $scope.cartItems.reduce(function (total, item) {
+            return total + (item.price * item.quantity || 0);
+        }, 0);
+    };
+
+    $scope.showItemDetail = function (product) {
+
+        $scope.selectedItem = product;
+        console.log('Show item detail:', product);
+        itemDetailModal.style.display = 'flex';
+    };
+
+      $scope.getStars = function (rating) {
+        var stars = [];
+        for (var i = 1; i <= 5; i++) {
+            stars.push(i <= rating);
+        }
+        return stars;
+    };
+     
+    });
+
+  </script>
+</body>
+
+</html>
